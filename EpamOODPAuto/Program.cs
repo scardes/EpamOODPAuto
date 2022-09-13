@@ -16,13 +16,23 @@ namespace EpamOODPAuto
             while (!endApp)
             {
 
+                AutoSingleBase asb1 = AutoSingleBase.GetAutoBase();
+                AutoSingleBase asb2 = AutoSingleBase.GetAutoBase();
 
+                if (asb1 == asb2)
+                {
+                    Console.WriteLine("Singleton works\n");
+                }
+                else
+                {
+                    Console.WriteLine("Singleton failed");
+                }
 
 
                 // Wait for the user to respond before closing.
-                Console.Write("Enter 'exit' to close the app, or press any key and Enter to continue: ");
+                Console.Write("Enter 'e' to close the app, or press any key and Enter to continue: "); //TODO Change to exit
 
-                if (Console.ReadLine() == "exit")
+                if (Console.ReadLine() == "e") //TODO Change to exit
                 {
                     endApp = true;
                 }
