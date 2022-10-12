@@ -16,10 +16,10 @@ namespace EpamOODPAuto
             // Repeat program, until user input "exit" to exit.
             while (!endApp)
             {
-                //string? brand = string.Empty;
-                //string? model = string.Empty;
-                //int count;
-                //int price;
+                string? brand = string.Empty;
+                string? model = string.Empty;
+                int count;
+                int price;
 
                 var theCars = new List<Cars>();
 
@@ -37,15 +37,31 @@ namespace EpamOODPAuto
                     Console.WriteLine( $"{cars.Brand} {cars.Model} {cars.Count} {cars.Price} " );
                 }
 
-                
-                //string[] arr = Console.ReadLine().Split();
+                try
+                {
+                    Console.WriteLine("Please enter information about cars: brand, model, count, price for one car");
+                    string[] arr = Console.ReadLine().Split();
 
-                //brand = arr[0];
-                //model = arr[1];
-                //int.TryParse(arr[2], out count);
-                //int.TryParse(arr[3], out price);
+                    brand = arr[0];
+                    model = arr[1];
+                    int.TryParse(arr[2], out count);
+                    int.TryParse(arr[3], out price);
 
-                //Console.WriteLine($" brand= {brand},  model= {model} count= {count}, price= {price}");
+                    theCars.Add(new Cars() { Brand = brand, Model = model, Count = count, Price = price });
+                }
+                catch
+                {
+                    Console.WriteLine("ERROOOOOOOOR");
+                }
+
+                Console.WriteLine("\n FINAL LIST OF CAR \n");
+                foreach (var cars in theCars)
+                {
+                    Console.WriteLine($"{cars.Brand} {cars.Model} {cars.Count} {cars.Price} ");
+                }
+                Console.WriteLine("\n END OF LIST OF CAR \n");
+
+                Console.WriteLine("\n GIVE ME A COMMAND \n");
 
                 AutoSingleBase asb1 = AutoSingleBase.GetAutoBase();
                 AutoSingleBase asb2 = AutoSingleBase.GetAutoBase();
