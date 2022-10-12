@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
+/// <summary>
+/// Auto has information about model, brand, count of cars and price for one car
+/// </summary>
 namespace EpamOODPAuto
 {
     public class Cars

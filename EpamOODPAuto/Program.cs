@@ -16,53 +16,7 @@ namespace EpamOODPAuto
             // Repeat program, until user input "exit" to exit.
             while (!endApp)
             {
-                string? brand = string.Empty;
-                string? model = string.Empty;
-                int count;
-                int price;
-
-                var theCars = new List<Cars>();
-
-                Console.WriteLine("Please enter information about cars: brand, model, count, price");
-
-                theCars = new List<Cars>()
-                {
-                    new Cars() { Brand = "Volvo",  Model = "VC300", Count = 10,    Price = 80000},
-                    new Cars() { Brand = "Mersedes",  Model = "S500", Count = 7,    Price = 770000},
-                    new Cars() { Brand = "Honda",  Model = "Civic", Count = 40,    Price = 20000}
-                };
-
-                foreach (var cars in theCars)
-                {
-                    Console.WriteLine( $"{cars.Brand} {cars.Model} {cars.Count} {cars.Price} " );
-                }
-
-                try
-                {
-                    Console.WriteLine("Please enter information about cars: brand, model, count, price for one car");
-                    string[] arr = Console.ReadLine().Split();
-
-                    brand = arr[0];
-                    model = arr[1];
-                    int.TryParse(arr[2], out count);
-                    int.TryParse(arr[3], out price);
-
-                    theCars.Add(new Cars() { Brand = brand, Model = model, Count = count, Price = price });
-                }
-                catch
-                {
-                    Console.WriteLine("ERROOOOOOOOR");
-                }
-
-                Console.WriteLine("\n FINAL LIST OF CAR \n");
-                foreach (var cars in theCars)
-                {
-                    Console.WriteLine($"{cars.Brand} {cars.Model} {cars.Count} {cars.Price} ");
-                }
-                Console.WriteLine("\n END OF LIST OF CAR \n");
-
-                Console.WriteLine("\n GIVE ME A COMMAND \n");
-
+                
                 AutoSingleBase asb1 = AutoSingleBase.GetAutoBase();
                 AutoSingleBase asb2 = AutoSingleBase.GetAutoBase();
 
@@ -76,17 +30,17 @@ namespace EpamOODPAuto
                     Console.WriteLine("Singleton failed");
                 }
 
-                asb1.businessLogic("Send Command");
+                asb1.businessLogic();
 
 
                 // Wait for the user to respond before closing.
-                Console.Write("Enter 'e' to close the app, or press any key and Enter to continue: "); //TODO Change to exit
+                Console.Write("\nEnter 'e' to close the app, or press any key and Enter to continue: "); //TODO Change to exit
 
                 if (Console.ReadLine() == "e") //TODO Change to exit
                 {
                     endApp = true;
                 }
-
+                
                 Console.WriteLine("\n"); // Friendly linespacing
             }
         }
