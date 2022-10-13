@@ -16,26 +16,16 @@ namespace EpamOODPAuto
             // Repeat program, until user input "exit" to exit.
             while (!endApp)
             {
-                
-                AutoSingleBase asb1 = AutoSingleBase.GetAutoBase();
-                AutoSingleBase asb2 = AutoSingleBase.GetAutoBase();
+                //Start work with command
+                Invoker invoker = new Invoker();
 
-                //TODO This just for check (need be deleted)
-                if (asb1 == asb2)
-                {
-                    Console.WriteLine("Singleton works\n");
-                }
-                else
-                {
-                    Console.WriteLine("Singleton failed");
-                }
-
-                asb1.businessLogic();
+                invoker.SetOnStart(new UserCommand());
+                invoker.DoSomethingImportant();
 
                 // Wait for the user to respond before closing.
-                Console.Write("\nEnter 'e' to close the app, or press any key and Enter to continue: "); //TODO Change to exit
+                Console.Write("\nEnter 'exit' to close the app, or press any key and Enter to continue: "); 
 
-                if (Console.ReadLine() == "e") //TODO Change to exit
+                if (Console.ReadLine() == "exit") 
                 {
                     endApp = true;
                 }

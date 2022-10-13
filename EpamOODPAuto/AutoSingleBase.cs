@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 /// <summary>
-/// Singleton class of Auto Database
+/// Singleton class of Auto Database LINQ and logic with LINQ
 /// </summary>
 namespace EpamOODPAuto
 {
@@ -23,10 +23,13 @@ namespace EpamOODPAuto
             return _instance;
         }
 
-        public void businessLogic()
+        // Class have List of Car + user add new car by console and logic for commands
+        public void singeletonLogic()
         {
             string? brand = string.Empty;
             string? model = string.Empty;
+            string? userCommand = string.Empty;
+            string? userBrand = string.Empty;
             int count;
             int price;
 
@@ -37,16 +40,16 @@ namespace EpamOODPAuto
             theCars = new List<Cars>()
                 {
                     new Cars() { Brand = "Volvo", Model = "VC300", Count = 10, Price = 80000},
-                    new Cars() { Brand = "Volvo", Model = "A777", Count = 13, Price = 10000 },
-                    new Cars() { Brand = "Mersedes", Model = "S500", Count = 7, Price = 770000},
-                    new Cars() { Brand = "Honda", Model = "Civic", Count = 40, Price = 20000}
+                    new Cars() { Brand = "Volvo", Model = "A777", Count = 5, Price = 20000 },
+                    new Cars() { Brand = "Mersedes", Model = "S500", Count = 2, Price = 770000},
+                    new Cars() { Brand = "Honda", Model = "Civic", Count = 33, Price = 20000}
                 };
 
             while (!correctInput)
             {
                 try
                 {
-                    Console.WriteLine("Please enter information about cars: brand, model, count, price for one car");
+                    Console.WriteLine("Please enter information about cars: 1=brand, 2=model, 3=count, 4=price for one car");
                     string[] arr = Console.ReadLine().Split();
 
                     brand = arr[0];
@@ -69,35 +72,61 @@ namespace EpamOODPAuto
                 Console.WriteLine($"{cars.Brand} {cars.Model} {cars.Count} {cars.Price} ");
             }
 
-            // Start new logic
+            // Start logic for user commands
+            Console.WriteLine("\nGive me a command: \n" +
+                "1:count types \n" +
+                "2:count all \n" +
+                "3:average price \n" +
+                "4:average price type \n");
 
-            // count types
-            var countTypes = (from se in theCars
-                              select se).Count();
+            userCommand = Console.ReadLine();
 
-            Console.WriteLine($"\n count types {countTypes} \n");
+            switch (userCommand)
+            {
+                //count types
+                case "1":
+                    var countTypes = (from se in theCars
+                                      select se).Count();
 
-            //count all
-            var countAll = (from se in theCars
-                            select se.Count).Sum();
+                    Console.WriteLine($"\nCount types {countTypes} \n");
+                    break;
+                //count all
+                case "2":
+                    var countAll = (from se in theCars
+                                    select se.Count).Sum();
 
-            Console.WriteLine($"\n countAll {countAll} \n");
-            
-            //average price
-            var averagePrice = (from se in theCars
-                                select se.Price).Average();
+                    Console.WriteLine($"\nCountAll {countAll} \n");
+                    break;
+                //average price
+                case "3":
+                    var averagePrice = (from se in theCars
+                                        select se.Price).Average();
 
-            Console.WriteLine($"\n averagePrice {averagePrice} \n");
+                    Console.WriteLine($"\nAveragePrice {averagePrice} \n");
+                    break;
+                //average price for user console type = Brand
+                case "4":
+                    Console.WriteLine("Please enter the cars Type \n");
+                    userBrand = Console.ReadLine();
+                    
+                    try
+                    {
+                        var averagePriceType = (from se in theCars
+                                                where se.Brand == userBrand
+                                                select se.Price).Average();
 
-            //average price type
-            // TO DO console input for Brand
-            var averagePriceType =
-                (from se in theCars
-                 where se.Brand == "Volvo"
-                 select se.Price).Average();
-
-            Console.WriteLine($"\n averagePriceType Volvo {averagePriceType} \n");
+                        Console.WriteLine($"\nAveragePriceType {userBrand} : {averagePriceType} \n");
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Please enter correct cars Type \n");
+                    }
+                    break;
+                //Return text for an incorrect option entry.
+                default:
+                    Console.WriteLine("Command ERROR\n");
+                    break;
+            }
         }
-
     }
 }
