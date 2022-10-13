@@ -32,7 +32,6 @@ namespace EpamOODPAuto
 
                 asb1.businessLogic();
 
-
                 // Wait for the user to respond before closing.
                 Console.Write("\nEnter 'e' to close the app, or press any key and Enter to continue: "); //TODO Change to exit
 
